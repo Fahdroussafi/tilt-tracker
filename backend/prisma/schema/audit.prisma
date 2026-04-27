@@ -1,0 +1,17 @@
+model AuditLog {
+  id          String   @id @default(uuid()) @map("log_id")
+  action      String   @map("action")
+  description String?  @map("description")
+  resource    String   @map("resource")
+  resourceId  String?  @map("resource_id")
+  userId      String?  @map("user_id")
+  payload     Json?    @map("payload")
+  ipAddress   String?  @map("ip_address")
+  status      String   @map("status")
+  timestamp   DateTime @default(now()) @map("timestamp")
+
+  @@index([resourceId])
+  @@index([userId])
+  @@index([timestamp])
+  @@map("audit_logs")
+}

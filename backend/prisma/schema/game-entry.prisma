@@ -1,0 +1,12 @@
+model GameEntry {
+  id        String   @id @default(uuid())
+  sessionId String   @map("session_id")
+  session   Session  @relation(fields: [sessionId], references: [id])
+  result    String
+  tiltLevel Int      @map("tilt_level")
+  tags      String[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([sessionId])
+  @@map("game_entries")
+}

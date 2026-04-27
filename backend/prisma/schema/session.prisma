@@ -1,0 +1,14 @@
+model Session {
+  id        String      @id @default(uuid())
+  userId    String      @map("user_id")
+  user      User        @relation(fields: [userId], references: [id])
+  startTime DateTime    @default(now()) @map("start_time")
+  endTime   DateTime?   @map("end_time")
+  moodStart Int         @map("mood_start")
+  moodEnd   Int?        @map("mood_end")
+  tiltScore Float?      @map("tilt_score")
+  games     GameEntry[]
+
+  @@index([userId])
+  @@map("sessions")
+}
