@@ -20,7 +20,7 @@ import {
 } from "~/components/ui/select"
 import { Textarea } from "~/components/ui/textarea"
 import { useAuth } from "~/context/auth.context"
-import { apiClient } from "~/lib/api"
+import { api } from "~/lib/api"
 import { format } from "date-fns"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import { Trash2 } from "lucide-react"
@@ -86,7 +86,7 @@ export default function SessionDetail() {
     const fetchSession = async () => {
       try {
         setLoading(true)
-        const response = await apiClient.get(`/session/${id}`)
+        const response = await api.get(`/session/${id}`)
         setSession(response.data)
         setError(null)
       } catch (err) {
@@ -110,7 +110,7 @@ export default function SessionDetail() {
 
     try {
       setIsAddingGame(true)
-      const response = await apiClient.post(`/game-entry`, {
+      const response = await api.post(`/game-entry`, {
         sessionId: id,
         gameName,
         result: gameResult,
@@ -145,7 +145,7 @@ export default function SessionDetail() {
     }
 
     try {
-      await apiClient.delete(`/game-entry/${gameId}`)
+      await api.delete(`/game-entry/${gameId}`)
 
       if (session) {
         setSession({
@@ -162,7 +162,7 @@ export default function SessionDetail() {
   const handleEndSession = async () => {
     try {
       setIsEndingSession(true)
-      const response = await apiClient.patch(`/session/${id}`, {
+      const response = await api.patch(`/session/${id}`, {
         moodEnd: endMood,
         endTime: new Date().toISOString(),
       })

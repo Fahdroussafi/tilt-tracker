@@ -11,7 +11,7 @@ import {
 import { Label } from "~/components/ui/label"
 import { Textarea } from "~/components/ui/textarea"
 import { useAuth } from "~/context/auth.context"
-import { apiClient } from "~/lib/api"
+import { api } from "~/lib/api"
 import { useEffect } from "react"
 
 const MOOD_EMOJIS: { [key: number]: string } = {
@@ -46,7 +46,7 @@ export default function NewSession() {
       setIsSubmitting(true)
       setError(null)
 
-      const response = await apiClient.post("/session", {
+      const response = await api.post("/session", {
         moodStart: mood,
         notes,
       })

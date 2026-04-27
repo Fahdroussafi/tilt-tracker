@@ -10,7 +10,7 @@ import {
 } from "~/components/ui/card"
 import { Badge } from "~/components/ui/badge"
 import { useAuth } from "~/context/auth.context"
-import { apiClient } from "~/lib/api"
+import { api } from "~/lib/api"
 import {
   LineChart,
   Line,
@@ -76,7 +76,7 @@ export default function Dashboard() {
       try {
         setLoading(true)
         const [sessionsRes] = await Promise.all([
-          apiClient.get("/session"),
+          api.get("/session"),
         ])
 
         const sessions = sessionsRes.data || []

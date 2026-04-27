@@ -21,7 +21,7 @@ import {
 } from "~/components/ui/dialog"
 import { useAuth } from "~/context/auth.context"
 import { useLogout } from "~/hooks/use-auth"
-import { apiClient } from "~/lib/api"
+import { api } from "~/lib/api"
 import { User, Lock, LogOut, Trash2 } from "lucide-react"
 
 interface UserStats {
@@ -70,7 +70,7 @@ export default function Profile() {
       try {
         setLoading(true)
         const [sessionsRes] = await Promise.all([
-          apiClient.get("/session"),
+          api.get("/session"),
         ])
 
         const sessions = sessionsRes.data || []
@@ -130,7 +130,7 @@ export default function Profile() {
 
     try {
       setIsChangingPassword(true)
-      await apiClient.post("/auth/change-password", {
+      await api.post("/auth/change-password", {
         currentPassword,
         newPassword,
       })
@@ -159,7 +159,7 @@ export default function Profile() {
 
     try {
       setIsDeletingAccount(true)
-      await apiClient.delete("/auth/account")
+      await api.delete("/auth/account")
 
       logout.mutate(undefined, {
         onSuccess: () => navigate("/login"),

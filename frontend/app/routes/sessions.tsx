@@ -11,7 +11,7 @@ import {
 import { Badge } from "~/components/ui/badge"
 import { Input } from "~/components/ui/input"
 import { useAuth } from "~/context/auth.context"
-import { apiClient } from "~/lib/api"
+import { api } from "~/lib/api"
 import { format } from "date-fns"
 import { Search, Plus } from "lucide-react"
 
@@ -51,7 +51,7 @@ export default function Sessions() {
     const fetchSessions = async () => {
       try {
         setLoading(true)
-        const response = await apiClient.get("/session")
+        const response = await api.get("/session")
         const data = response.data || []
         
         const sortedSessions = [...data].sort(

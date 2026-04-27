@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "~/components/ui/select"
 import { useAuth } from "~/context/auth.context"
-import { apiClient } from "~/lib/api"
+import { api } from "~/lib/api"
 import {
   LineChart,
   Line,
@@ -74,7 +74,7 @@ export default function Analytics() {
     const fetchSessions = async () => {
       try {
         setLoading(true)
-        const response = await apiClient.get("/session")
+        const response = await api.get("/session")
         const data = response.data || []
         setSessions(data)
         setError(null)
